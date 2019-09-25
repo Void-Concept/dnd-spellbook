@@ -13,9 +13,15 @@
         "name spell-level"
 }
 
+.spell-info-icon {
+    float: left;
+    margin-top: 3px;
+    margin-right: 4px;
+}
+
 .spell-name {
     grid-area: name;
-    font-size: 1vw;
+    font-size: 1.7em;
 }
 
 .spell-level {
@@ -32,4 +38,26 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     column-gap: 8px;
+}
+
+.spell-stats span:first-child {
+    justify-self: left;
+}
+
+.spell-stats span {
+    justify-self: center;
+}
+
+.spell-stats span:last-child {
+    justify-self: right;
+}
+
+.spell-stats-icon {
+    float: left;
+    margin-top: 4px;
+    margin-right: 4px;
+}
+
+.m-r-4 {
+    margin-right: 4px !important;
 }

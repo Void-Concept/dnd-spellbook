@@ -13,6 +13,7 @@ const spells: Spell[] = [{
     higherLevel: "",
     range: "60 ft",
     concentration: true,
+    ritual: true
 }];
 
 export const Spellbook = () => {

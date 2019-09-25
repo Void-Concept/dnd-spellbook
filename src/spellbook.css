@@ -1,4 +1,12 @@
-.spellbook {
-    width: 50%;
-    margin: auto;
+@media(min-width: 1200px) {
+    .spellbook {
+        width: 50%;
+        margin: auto;
+    }
+}
+
+@media(max-width: 1200px) {
+    .spellbook {
+        margin: 0 8px;
+    }
 }
