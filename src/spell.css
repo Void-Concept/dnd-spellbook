@@ -1,0 +1,35 @@
+.spell {
+    padding: 8px;
+    border: 1px solid black;
+    margin: 8px 0;
+}
+
+.spell-info {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+        "name spell-school"
+        "name spell-level"
+}
+
+.spell-name {
+    grid-area: name;
+    font-size: 1vw;
+}
+
+.spell-level {
+    grid-area: "level";
+    justify-self: right;
+}
+
+.spell-school {
+    grid-area: "school";
+    justify-self: right;
+}
+
+.spell-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 8px;
+}
