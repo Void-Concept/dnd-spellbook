@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./spell.css";
 import CameraTimerIcon from "mdi-react/CameraTimerIcon";
 import BullseyeArrowIcon from "mdi-react/BullseyeArrowIcon";
 import TimerSandIcon from "mdi-react/TimerSandIcon";
 import FlaskOutlineIcon from "mdi-react/FlaskOutlineIcon";
 import ThoughtBubbleIcon from "mdi-react/ThoughtBubbleIcon";
-import BrainIcon from "mdi-react/BrainIcon";
 import BookOpenPageVariantIcon from "mdi-react/BookOpenPageVariantIcon";
 
 export type SpellLevel = "Cantrip" | "1st" | "2nd" | "3rd" | "4th" | "5th" | "6th" | "7th" | "8th" | "9th"
@@ -36,8 +35,14 @@ export const SpellComponent = ({ spell }: SpellProps) => {
     const infoIconSize = "16px";
     const statsIconSize = "16px";
 
+    const [showDescription, setShowDescription] = useState(false);
+
+    const onSpellClick = () => {
+        setShowDescription(!showDescription);
+    }
+
     return (
-        <div className="spell">
+        <div className="spell" onClick={onSpellClick}>
             <div className="spell-info">
                 <span className="spell-name">{spell.name}</span>
                 <span className="spell-school">{spell.school}</span>
@@ -66,6 +71,12 @@ export const SpellComponent = ({ spell }: SpellProps) => {
                     {spell.duration}
                 </span>
             </div>
+            {showDescription && <>
+                <hr />
+                <div className="spell-description">
+                    {spell.description}
+                </div>
+            </>}
         </div>
     );
 };

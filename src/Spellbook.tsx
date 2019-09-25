@@ -30,7 +30,7 @@ const cantrips: Spell[] = [{
     range: "10 ft",
     components: "V, S",
     duration: "Up to 1 hour",
-    description: "This spell is a minor magical trick that novice spellcasters use for practice. You create one of the following magical effects within range:\nYou create an instantaneous, harmless sensory effect, such as a shower of sparks, a puff of wind, faint musical notes, or an odd odor.\nYou instantaneously light or snuff out a candle, a torch, or a small campfire.\nYou instantaneously clean or soil an object no larger than 1 cubic foot.\nYou chill, warm, or flavor up to 1 cubic foot of nonliving material for 1 hour.\nYou make a color, a small mark, or a symbol appear on an object or a surface for 1 hour.\nYou create a nonmagical trinket or an illusory image that can fit in your hand and that lasts until the end of your next turn.\nIf you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.",
+    description: "This spell is a minor magical trick that novice spellcasters use for practice. You create one of the following magical effects within range:\n\nYou create an instantaneous, harmless sensory effect, such as a shower of sparks, a puff of wind, faint musical notes, or an odd odor.\n\nYou instantaneously light or snuff out a candle, a torch, or a small campfire.\n\nYou instantaneously clean or soil an object no larger than 1 cubic foot.\n\nYou chill, warm, or flavor up to 1 cubic foot of nonliving material for 1 hour.\n\nYou make a color, a small mark, or a symbol appear on an object or a surface for 1 hour.\n\nYou create a nonmagical trinket or an illusory image that can fit in your hand and that lasts until the end of your next turn.\n\nIf you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.",
 }, {
     name: "Ray of Frost",
     level: "Cantrip",
@@ -73,7 +73,7 @@ const first: Spell[] = [{
     components: "V, S, M",
     materials: "A pinch of soot and salt",
     duration: "1 hour",
-    description: "For the duration, you understand the literal meaning of any spoken language that you hear.You also understand any written language that you see, but you must be touching the surface on which the words are written.It takes about 1 minute to read one page of text.\nThis spell doesn’t decode secret messages in a text or a glyph, such as an arcane sigil, that isn’t part of a written language.",
+    description: "For the duration, you understand the literal meaning of any spoken language that you hear.You also understand any written language that you see, but you must be touching the surface on which the words are written.It takes about 1 minute to read one page of text.\n\nThis spell doesn’t decode secret messages in a text or a glyph, such as an arcane sigil, that isn’t part of a written language.",
 }, {
     name: "Detect Magic",
     level: "1st",
@@ -84,7 +84,7 @@ const first: Spell[] = [{
     components: "V, S",
     duration: "Up to 10 minutes",
     concentration: true,
-    description: "For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.\nThe spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.",
+    description: "For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.\n\nThe spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.",
 }, {
     name: "Faerie Fire",
     level: "1st",
@@ -95,7 +95,7 @@ const first: Spell[] = [{
     components: "V",
     duration: "Up to 1 minute",
     concentration: true,
-    description: "Each object in a 20-foot cube within range is outlined in blue, green, or violet light (your choice). Any creature in the area when the spell is cast is also outlined in light if it fails a Dexterity saving throw. For the duration, objects and affected creatures shed dim light in a 10-foot radius.\nAny attack roll against an affected creature or object has advantage if the attacker can see it, and the affected creature or object can’t benefit from being invisible.",
+    description: "Each object in a 20-foot cube within range is outlined in blue, green, or violet light (your choice). Any creature in the area when the spell is cast is also outlined in light if it fails a Dexterity saving throw. For the duration, objects and affected creatures shed dim light in a 10-foot radius.\n\nAny attack roll against an affected creature or object has advantage if the attacker can see it, and the affected creature or object can’t benefit from being invisible.",
 }, {
     name: "Find Familiar",
     level: "1st",
@@ -106,7 +106,7 @@ const first: Spell[] = [{
     components: "V, S, M",
     materials: "10 gp worth of charcoal, incense, and herbs that must be consumed by fire in a brass brazier",
     duration: "Instant",
-    description: "You gain the service of a familiar, a spirit that takes an animal form you choose: bat, cat, crab, frog (toad), hawk, lizard, octopus, owl, poisonous snake, fish (quipper), rat, raven, sea horse, spider, or weasel. Appearing in an unoccupied space within range, the familiar has the statistics of the chosen form, though it is a celestial, fey, or fiend (your choice) instead of a beast.\nYour familiar acts independently of you, but it always obeys your commands.In combat, it rolls its own initiative and acts on its own turn.A familiar can’t attack, but it can take other actions as normal.\nWhen the familiar drops to 0 hit points, it disappears, leaving behind no physical form.It reappears after you cast this spell again\nWhile your familiar is within 100 feet of you, you can communicate with it telepathically.Additionally, as an action, you can see through your familiar’s eyes and hear what it hears until the start of your next turn, gaining the benefits of any special senses that the familiar has.During this time, you are deaf and blind with regard to your own senses.\nAs an action, you can temporarily dismiss your familiar.It disappears into a pocket dimension where it awaits your summons.Alternatively, you can dismiss it forever.As an action while it is temporarily dismissed, you can cause it to reappear in any unoccupied space within 30 feet of you.\nYou can’t have more than one familiar at a time.If you cast this spell while you already have a familiar, you instead cause it to adopt a new form.Choose one of the forms from the above list.Your familiar transforms into the chosen creature.\nFinally, when you cast a spell with a range of touch, your familiar can deliver the spell as if it had cast the spell.Your familiar must be within 100 feet of you, and it must use its reaction to deliver the spell when you cast it.If the spell requires an attack roll, you use your attack modifier for the roll.",
+    description: "You gain the service of a familiar, a spirit that takes an animal form you choose: bat, cat, crab, frog (toad), hawk, lizard, octopus, owl, poisonous snake, fish (quipper), rat, raven, sea horse, spider, or weasel. Appearing in an unoccupied space within range, the familiar has the statistics of the chosen form, though it is a celestial, fey, or fiend (your choice) instead of a beast.\n\nYour familiar acts independently of you, but it always obeys your commands.In combat, it rolls its own initiative and acts on its own turn.A familiar can’t attack, but it can take other actions as normal.\n\nWhen the familiar drops to 0 hit points, it disappears, leaving behind no physical form.It reappears after you cast this spell again\n\nWhile your familiar is within 100 feet of you, you can communicate with it telepathically.Additionally, as an action, you can see through your familiar’s eyes and hear what it hears until the start of your next turn, gaining the benefits of any special senses that the familiar has.During this time, you are deaf and blind with regard to your own senses.\n\nAs an action, you can temporarily dismiss your familiar.It disappears into a pocket dimension where it awaits your summons.Alternatively, you can dismiss it forever.As an action while it is temporarily dismissed, you can cause it to reappear in any unoccupied space within 30 feet of you.\n\nYou can’t have more than one familiar at a time.If you cast this spell while you already have a familiar, you instead cause it to adopt a new form.Choose one of the forms from the above list.Your familiar transforms into the chosen creature.\n\nFinally, when you cast a spell with a range of touch, your familiar can deliver the spell as if it had cast the spell.Your familiar must be within 100 feet of you, and it must use its reaction to deliver the spell when you cast it.If the spell requires an attack roll, you use your attack modifier for the roll.",
 }, {
     name: "Sleep",
     level: "1st",
@@ -169,7 +169,7 @@ const first: Spell[] = [{
     components: "V, S, M",
     materials: "A piece of string and a bit of wood",
     duration: "1 hour",
-    description: "This spell creates an invisible, mindless, shapeless force that performs simple tasks at your command until the spell ends. The servant springs into existence in an unoccupied space on the ground within range. It has AC 10, 1 hit point, and a Strength of 2, and it can’t attack. If it drops to 0 hit points, the spell ends.\nOnce on each of your turns as a bonus action, you can mentally command the servant to move up to 15 feet and interact with an object.The servant can perform simple tasks that a human servant could do, such as fetching things, cleaning, mending, folding clothes, lighting fires, serving food, and pouring wine.Once you give the command, the servant performs the task to the best of its ability until it completes the task, then waits for your next command.\nIf you command the servant to perform a task that would move it more than 60 feet away from you, the spell ends.",
+    description: "This spell creates an invisible, mindless, shapeless force that performs simple tasks at your command until the spell ends. The servant springs into existence in an unoccupied space on the ground within range. It has AC 10, 1 hit point, and a Strength of 2, and it can’t attack. If it drops to 0 hit points, the spell ends.\n\nOnce on each of your turns as a bonus action, you can mentally command the servant to move up to 15 feet and interact with an object.The servant can perform simple tasks that a human servant could do, such as fetching things, cleaning, mending, folding clothes, lighting fires, serving food, and pouring wine.Once you give the command, the servant performs the task to the best of its ability until it completes the task, then waits for your next command.\n\nIf you command the servant to perform a task that would move it more than 60 feet away from you, the spell ends.",
 }]
 
 const second: Spell[] = [{
@@ -203,7 +203,7 @@ const second: Spell[] = [{
     materials: "A bit of spiderweb",
     duration: "Up to 1 hour",
     concentration: true,
-    description: "You conjure a mass of thick, sticky webbing at a point of your choice within range. The webs fill a 20-foot cube from that point for the duration. The webs are difficult terrain and lightly obscure their area.\nIf the webs aren’t anchored between two solid masses(such as walls or trees) or layered across a floor, wall, or ceiling, the conjured web collapses on itself, and the spell ends at the start of your next turn.Webs layered over a flat surface have a depth of 5 feet.\nEach creature that starts its turn in the webs or that enters them during its turn must make a Dexterity saving throw.On a failed save, the creature is restrained as long as it remains in the webs or until it breaks free.\nA creature restrained by the webs can use its action to make a Strength check against your spell save DC.If it succeeds, it is no longer restrained.\nThe webs are flammable.Any 5-foot cube of webs exposed to fire burns away in 1 round, dealing 2d4 fire damage to any creature that starts its turn in the fire.",
+    description: "You conjure a mass of thick, sticky webbing at a point of your choice within range. The webs fill a 20-foot cube from that point for the duration. The webs are difficult terrain and lightly obscure their area.\n\nIf the webs aren’t anchored between two solid masses(such as walls or trees) or layered across a floor, wall, or ceiling, the conjured web collapses on itself, and the spell ends at the start of your next turn.Webs layered over a flat surface have a depth of 5 feet.\n\nEach creature that starts its turn in the webs or that enters them during its turn must make a Dexterity saving throw.On a failed save, the creature is restrained as long as it remains in the webs or until it breaks free.\n\nA creature restrained by the webs can use its action to make a Strength check against your spell save DC.If it succeeds, it is no longer restrained.\n\nThe webs are flammable.Any 5-foot cube of webs exposed to fire burns away in 1 round, dealing 2d4 fire damage to any creature that starts its turn in the fire.",
 }, {
     name: "Suggestion",
     level: "2nd",
@@ -214,7 +214,7 @@ const second: Spell[] = [{
     materials: "A snake's tongue and either a bit of honeycomb or a drop of sweet oil",
     duration: "Up to 8 hour",
     concentration: true,
-    description: "You suggest a course of activity (limited to a sentence or two) and magically influence a creature you can see within range that can hear and understand you. Creatures that can’t be charmed are immune to this effect. The suggestion must be worded in such a manner as to make the course of action sound reasonable. Asking the creature to stab itself, throw itself onto a spear, immolate itself, or do some other obviously harmful act ends the spell.\nThe target must make a Wisdom saving throw.On a failed save, it pursues the course of action you described to the best of its ability.The suggested course of action can continue for the entire duration.If the suggested activity can be completed in a shorter time, the spell ends when the subject finishes what it was asked to do.\nYou can also specify conditions that will trigger a special activity during the duration.For example, you might suggest that a knight give her warhorse to the first beggar she meets.If the condition isn’t met before the spell expires, the activity isn’t performed.\nIf you or any of your companions damage the target, the spell ends.",
+    description: "You suggest a course of activity (limited to a sentence or two) and magically influence a creature you can see within range that can hear and understand you. Creatures that can’t be charmed are immune to this effect. The suggestion must be worded in such a manner as to make the course of action sound reasonable. Asking the creature to stab itself, throw itself onto a spear, immolate itself, or do some other obviously harmful act ends the spell.\n\nThe target must make a Wisdom saving throw.On a failed save, it pursues the course of action you described to the best of its ability.The suggested course of action can continue for the entire duration.If the suggested activity can be completed in a shorter time, the spell ends when the subject finishes what it was asked to do.\n\nYou can also specify conditions that will trigger a special activity during the duration.For example, you might suggest that a knight give her warhorse to the first beggar she meets.If the condition isn’t met before the spell expires, the activity isn’t performed.\n\nIf you or any of your companions damage the target, the spell ends.",
 }]
 
 const third: Spell[] = [{
@@ -225,7 +225,7 @@ const third: Spell[] = [{
     range: "60 ft",
     components: "S",
     duration: "Instant",
-    description: "You attempt to interrupt a creature in the process of casting a spell. If the creature is casting a spell of 3rd level or lower, its spell fails and has no effect. If it is casting a spell of 4th level or higher, make an ability check using your spellcasting ability. The DC equals 10 + the spell’s level. On a success, the creature’s spell fails and has no effect.\nAt Higher Levels.When you cast this spell using a spell slot of 4th level or higher, the interrupted spell has no effect if its level is less than or equal to the level of the spell slot you used.",
+    description: "You attempt to interrupt a creature in the process of casting a spell. If the creature is casting a spell of 3rd level or lower, its spell fails and has no effect. If it is casting a spell of 4th level or higher, make an ability check using your spellcasting ability. The DC equals 10 + the spell’s level. On a success, the creature’s spell fails and has no effect.\n\nAt Higher Levels.When you cast this spell using a spell slot of 4th level or higher, the interrupted spell has no effect if its level is less than or equal to the level of the spell slot you used.",
 }, {
     name: "Tiny Hut",
     level: "3rd",
@@ -237,7 +237,7 @@ const third: Spell[] = [{
     components: "V, S, M",
     materials: "A small crystal bead",
     duration: "8 hours",
-    description: "A 10-foot-radius immobile dome of force springs into existence around and above you and remains stationary for the duration. The spell ends if you leave its area.\nNine creatures of Medium size or smaller can fit inside the dome with you.The spell fails if its area includes a larger creature or more than nine creatures.Creatures and objects within the dome when you cast this spell can move through it freely.All other creatures and objects are barred from passing through it.Spells and other magical effects can’t extend through the dome or be cast through it.The atmosphere inside the space is comfortable and dry, regardless of the weather outside.\nUntil the spell ends, you can command the interior to become dimly lit or dark.The dome is opaque from the outside, of any color you choose, but it is transparent from the inside.",
+    description: "A 10-foot-radius immobile dome of force springs into existence around and above you and remains stationary for the duration. The spell ends if you leave its area.\n\nNine creatures of Medium size or smaller can fit inside the dome with you.The spell fails if its area includes a larger creature or more than nine creatures.Creatures and objects within the dome when you cast this spell can move through it freely.All other creatures and objects are barred from passing through it.Spells and other magical effects can’t extend through the dome or be cast through it.The atmosphere inside the space is comfortable and dry, regardless of the weather outside.\n\nUntil the spell ends, you can command the interior to become dimly lit or dark.The dome is opaque from the outside, of any color you choose, but it is transparent from the inside.",
 }, {
     name: "Remove Curse",
     level: "3rd",
@@ -257,7 +257,7 @@ const third: Spell[] = [{
     materials: "A drop of molasses",
     duration: "Up to 1 minute",
     concentration: true,
-    description: "You alter time around up to six creatures of your choice in a 40-foot cube within range. Each target must succeed on a Wisdom saving throw or be affected by this spell for the duration.\nAn affected target’s speed is halved, it takes a −2 penalty to AC and Dexterity saving throws, and it can’t use reactions.On its turn, it can use either an action or a bonus action, not both.Regardless of the creature’s abilities or magic items, it can’t make more than one melee or ranged attack during its turn.\nIf the creature attempts to cast a spell with a casting time of 1 action, roll a d20.On an 11 or higher, the spell doesn’t take effect until the creature’s next turn, and the creature must use its action on that turn to complete the spell.If it can’t, the spell is wasted.\nA creature affected by this spell makes another Wisdom saving throw at the end of its turn.On a successful save, the effect ends for it.",
+    description: "You alter time around up to six creatures of your choice in a 40-foot cube within range. Each target must succeed on a Wisdom saving throw or be affected by this spell for the duration.\n\nAn affected target’s speed is halved, it takes a −2 penalty to AC and Dexterity saving throws, and it can’t use reactions.On its turn, it can use either an action or a bonus action, not both.Regardless of the creature’s abilities or magic items, it can’t make more than one melee or ranged attack during its turn.\n\nIf the creature attempts to cast a spell with a casting time of 1 action, roll a d20.On an 11 or higher, the spell doesn’t take effect until the creature’s next turn, and the creature must use its action on that turn to complete the spell.If it can’t, the spell is wasted.\n\nA creature affected by this spell makes another Wisdom saving throw at the end of its turn.On a successful save, the effect ends for it.",
 }, {
     name: "Sending",
     level: "3rd",
@@ -267,20 +267,38 @@ const third: Spell[] = [{
     components: "V, S, M",
     materials: "A short piece of fine copper wire",
     duration: "1 round",
-    description: "You send a short message of twenty-five words or less to a creature with which you are familiar. The creature hears the message in its mind, recognizes you as the sender if it knows you, and can answer in a like manner immediately. The spell enables creatures with Intelligence scores of at least 1 to understand the meaning of your message.\nYou can send the message across any distance and even to other planes of existence, but if the target is on a different plane than you, there is a 5 percent chance that the message doesn’t arrive.",
-}]
+    description: "You send a short message of twenty-five words or less to a creature with which you are familiar. The creature hears the message in its mind, recognizes you as the sender if it knows you, and can answer in a like manner immediately. The spell enables creatures with Intelligence scores of at least 1 to understand the meaning of your message.\n\nYou can send the message across any distance and even to other planes of existence, but if the target is on a different plane than you, there is a 5 percent chance that the message doesn’t arrive.",
+}];
 
-const spells = cantrips
-    .concat(first)
-    .concat(second)
-    .concat(third)
-
-export const Spellbook = () => {
+const Spells = ({ spells }: { spells: Spell[] }) => {
     return (
-        <div className="spellbook">
+        <>
             {spells.map((spell, index) => {
                 return <SpellComponent key={index} spell={spell} />;
             })}
+        </>
+    )
+}
+
+export const Spellbook = () => {
+    return (
+        <div className="spellbook-container">
+            <h1>Cantrip</h1>
+            <div className="spellbook">
+                <Spells spells={cantrips} />
+            </div>
+            <h1>1st</h1>
+            <div className="spellbook">
+                <Spells spells={first} />
+            </div>
+            <h1>2nd</h1>
+            <div className="spellbook">
+                <Spells spells={second} />
+            </div>
+            <h1>3rd</h1>
+            <div className="spellbook">
+                <Spells spells={third} />
+            </div>
         </div>
     )
 }

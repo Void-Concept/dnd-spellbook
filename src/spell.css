@@ -1,7 +1,6 @@
 .spell {
     padding: 8px;
     border: 1px solid black;
-    margin: 8px 0;
 }
 
 .spell-info {
@@ -36,7 +35,7 @@
 
 .spell-stats {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, auto);
     column-gap: 8px;
 }
 
@@ -56,6 +55,10 @@
     float: left;
     margin-top: 4px;
     margin-right: 4px;
+}
+
+.spell-description {
+    white-space: pre-wrap;
 }
 
 .m-r-4 {
