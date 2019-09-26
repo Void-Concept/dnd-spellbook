@@ -1,4 +1,4 @@
-import React, { useReducer, Dispatch, ReducerAction } from 'react';
+import React, { useReducer, Dispatch } from 'react';
 import { SpellComponent, Spell } from './Spell';
 import "./spellbook.css";
 
@@ -344,14 +344,14 @@ const spellReducer = (spellbook: SpellbookSpell[], action: SpellbookReducerActio
 
     switch (action.action) {
         case "prepare":
-            const wasPrepared = spellbook[index].prepared
+            const willBePrepared = !spellbook[index].prepared
             const notCantrip = spellbook[index].spell.level !== "Cantrip";
-            if (notCantrip && (wasPrepared || canPrepareNewSpell(spellbook))) {
+            if (notCantrip && (!willBePrepared || canPrepareNewSpell(spellbook))) {
                 return [
                     ...spellbook.slice(0, index),
                     {
                         ...spellbook[index],
-                        prepared: !wasPrepared
+                        prepared: willBePrepared
                     },
                     ...spellbook.slice(index + 1),
                 ];
@@ -359,14 +359,23 @@ const spellReducer = (spellbook: SpellbookSpell[], action: SpellbookReducerActio
                 return spellbook;
             }
         case "concentrate":
-            return [
-                ...spellbook.slice(0, index),
-                {
-                    ...spellbook[index],
-                    concentrating: !spellbook[index].concentrating
-                },
-                ...spellbook.slice(index + 1),
-            ];
+            const isAlreadyConcentrating = !!spellbook.find(spell => {
+                return spell.concentrating;
+            });
+            const willBeConcentrating = !spellbook[index].concentrating;
+            if (!willBeConcentrating || !isAlreadyConcentrating) {
+                return [
+                    ...spellbook.slice(0, index),
+                    {
+                        ...spellbook[index],
+                        concentrating: willBeConcentrating
+                    },
+                    ...spellbook.slice(index + 1),
+                ];
+            } else {
+                return spellbook;
+            }
+
         default:
             return spellbook;
     }

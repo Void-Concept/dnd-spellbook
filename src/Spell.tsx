@@ -64,7 +64,7 @@ const RitualIcon = ({ size, className }: RitualIconProps) => {
     );
 }
 
-export const SpellComponent = ({ spell, prepared, onPrepare, onConcentrate }: SpellComponentProps) => {
+export const SpellComponent = ({ spell, prepared, concentrating, onPrepare, onConcentrate }: SpellComponentProps) => {
     const infoIconSize = "16px";
     const statsIconSize = "16px";
 
@@ -72,7 +72,7 @@ export const SpellComponent = ({ spell, prepared, onPrepare, onConcentrate }: Sp
 
     // const [prepared, setPrepared] = useState(spell.level === "Cantrip" || spell.defaultPrepared);
 
-    const [concentrating, setConcentrating] = useState(false);
+    // const [concentrating, setConcentrating] = useState(false);
 
     const onSpellClick = () => {
         setShowDescription(!showDescription);
@@ -127,7 +127,7 @@ export const SpellComponent = ({ spell, prepared, onPrepare, onConcentrate }: Sp
                     <button className={`spell-button ${concentrating && "spell-button-selected"}`}
                         onClick={() => {
                             const newConcentrate = !concentrating
-                            setConcentrating(newConcentrate)
+                            // setConcentrating(newConcentrate)
                             onConcentrate && onConcentrate(spell)
                         }}>
                         Concentrate
