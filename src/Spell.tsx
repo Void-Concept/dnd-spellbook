@@ -25,10 +25,17 @@ export type Spell = {
     higherLevel?: string
     concentration?: boolean
     ritual?: boolean
+    defaultPrepared?: boolean
 }
 
-interface SpellProps {
+interface SpellComponentProps {
     spell: Spell
+
+    prepared?: boolean
+    onPrepare?: (spell: Spell) => void
+
+    concentrating?: boolean
+    onConcentrate?: (spell: Spell) => void
 }
 
 interface ConcentrationIconProps {
@@ -57,13 +64,13 @@ const RitualIcon = ({ size, className }: RitualIconProps) => {
     );
 }
 
-export const SpellComponent = ({ spell }: SpellProps) => {
+export const SpellComponent = ({ spell, prepared, onPrepare, onConcentrate }: SpellComponentProps) => {
     const infoIconSize = "16px";
     const statsIconSize = "16px";
 
     const [showDescription, setShowDescription] = useState(false);
 
-    const [prepared, setPrepared] = useState(spell.level === "Cantrip");
+    // const [prepared, setPrepared] = useState(spell.level === "Cantrip" || spell.defaultPrepared);
 
     const [concentrating, setConcentrating] = useState(false);
 
@@ -110,16 +117,22 @@ export const SpellComponent = ({ spell }: SpellProps) => {
             </div>
             <div className="spell-buttons">
                 <button className={`spell-button ${prepared && "spell-button-selected"}`}
-                    onClick={() => setPrepared(!prepared)}>
+                    onClick={() => {
+                        onPrepare && onPrepare(spell);
+                        // setPrepared(!prepared);
+                    }}>
                     Prepare
                 </button>
                 {spell.concentration && (
                     <button className={`spell-button ${concentrating && "spell-button-selected"}`}
-                        onClick={() => setConcentrating(!concentrating)}>
+                        onClick={() => {
+                            const newConcentrate = !concentrating
+                            setConcentrating(newConcentrate)
+                            onConcentrate && onConcentrate(spell)
+                        }}>
                         Concentrate
                     </button>
                 )}
-
             </div>
         </div>
     );

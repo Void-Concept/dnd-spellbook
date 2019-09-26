@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer, Dispatch, ReducerAction } from 'react';
 import { SpellComponent, Spell } from './Spell';
 import "./spellbook.css";
 
@@ -96,6 +96,7 @@ const first: Spell[] = [{
     duration: "Up to 1 minute",
     concentration: true,
     description: "Each object in a 20-foot cube within range is outlined in blue, green, or violet light (your choice). Any creature in the area when the spell is cast is also outlined in light if it fails a Dexterity saving throw. For the duration, objects and affected creatures shed dim light in a 10-foot radius.\n\nAny attack roll against an affected creature or object has advantage if the attacker can see it, and the affected creature or object can’t benefit from being invisible.",
+    defaultPrepared: true,
 }, {
     name: "Find Familiar",
     level: "1st",
@@ -149,6 +150,7 @@ const first: Spell[] = [{
     components: "V, S",
     duration: "1 round",
     description: "An invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from magic missile.",
+    defaultPrepared: true,
 }, {
     name: "Mage Armor",
     level: "1st",
@@ -159,6 +161,7 @@ const first: Spell[] = [{
     materials: "A piece of cured leather",
     duration: "8 hours",
     description: "You touch a willing creature who isn’t wearing armor, and a protective magical force surrounds it until the spell ends. The target’s base AC becomes 13 + its Dexterity modifier. The spell ends if the target dons armor or if you dismiss the spell as an action.",
+    defaultPrepared: true,
 }, {
     name: "Unseen Servant",
     level: "1st",
@@ -193,6 +196,7 @@ const second: Spell[] = [{
     components: "V",
     duration: "Instant",
     description: "Briefly surrounded by silvery mist, you teleport up to 30 feet to an unoccupied space that you can see.",
+    defaultPrepared: true,
 }, {
     name: "Web",
     level: "2nd",
@@ -215,6 +219,7 @@ const second: Spell[] = [{
     duration: "Up to 8 hour",
     concentration: true,
     description: "You suggest a course of activity (limited to a sentence or two) and magically influence a creature you can see within range that can hear and understand you. Creatures that can’t be charmed are immune to this effect. The suggestion must be worded in such a manner as to make the course of action sound reasonable. Asking the creature to stab itself, throw itself onto a spear, immolate itself, or do some other obviously harmful act ends the spell.\n\nThe target must make a Wisdom saving throw.On a failed save, it pursues the course of action you described to the best of its ability.The suggested course of action can continue for the entire duration.If the suggested activity can be completed in a shorter time, the spell ends when the subject finishes what it was asked to do.\n\nYou can also specify conditions that will trigger a special activity during the duration.For example, you might suggest that a knight give her warhorse to the first beggar she meets.If the condition isn’t met before the spell expires, the activity isn’t performed.\n\nIf you or any of your companions damage the target, the spell ends.",
+    defaultPrepared: true,
 }]
 
 const third: Spell[] = [{
@@ -226,6 +231,7 @@ const third: Spell[] = [{
     components: "S",
     duration: "Instant",
     description: "You attempt to interrupt a creature in the process of casting a spell. If the creature is casting a spell of 3rd level or lower, its spell fails and has no effect. If it is casting a spell of 4th level or higher, make an ability check using your spellcasting ability. The DC equals 10 + the spell’s level. On a success, the creature’s spell fails and has no effect.\n\nAt Higher Levels.When you cast this spell using a spell slot of 4th level or higher, the interrupted spell has no effect if its level is less than or equal to the level of the spell slot you used.",
+    defaultPrepared: true,
 }, {
     name: "Tiny Hut",
     level: "3rd",
@@ -247,6 +253,7 @@ const third: Spell[] = [{
     components: "V, S",
     duration: "Instant",
     description: "At your touch, all curses affecting one creature or object end. If the object is a cursed magic item, its curse remains, but the spell breaks its owner’s attunement to the object so it can be removed or discarded.",
+    defaultPrepared: true,
 }, {
     name: "Slow",
     level: "3rd",
@@ -258,6 +265,7 @@ const third: Spell[] = [{
     duration: "Up to 1 minute",
     concentration: true,
     description: "You alter time around up to six creatures of your choice in a 40-foot cube within range. Each target must succeed on a Wisdom saving throw or be affected by this spell for the duration.\n\nAn affected target’s speed is halved, it takes a −2 penalty to AC and Dexterity saving throws, and it can’t use reactions.On its turn, it can use either an action or a bonus action, not both.Regardless of the creature’s abilities or magic items, it can’t make more than one melee or ranged attack during its turn.\n\nIf the creature attempts to cast a spell with a casting time of 1 action, roll a d20.On an 11 or higher, the spell doesn’t take effect until the creature’s next turn, and the creature must use its action on that turn to complete the spell.If it can’t, the spell is wasted.\n\nA creature affected by this spell makes another Wisdom saving throw at the end of its turn.On a successful save, the effect ends for it.",
+    defaultPrepared: true,
 }, {
     name: "Sending",
     level: "3rd",
@@ -270,34 +278,120 @@ const third: Spell[] = [{
     description: "You send a short message of twenty-five words or less to a creature with which you are familiar. The creature hears the message in its mind, recognizes you as the sender if it knows you, and can answer in a like manner immediately. The spell enables creatures with Intelligence scores of at least 1 to understand the meaning of your message.\n\nYou can send the message across any distance and even to other planes of existence, but if the target is on a different plane than you, there is a 5 percent chance that the message doesn’t arrive.",
 }];
 
-const Spells = ({ spells }: { spells: Spell[] }) => {
+interface SpellsProps {
+    spells: SpellbookSpell[]
+    onChange: Dispatch<SpellbookReducerAction>
+}
+
+const Spells = ({ spells, onChange }: SpellsProps) => {
     return (
         <>
             {spells.map((spell, index) => {
-                return <SpellComponent key={index} spell={spell} />;
+                return <SpellComponent key={index}
+                    spell={spell.spell}
+                    concentrating={spell.concentrating}
+                    onConcentrate={() => {
+                        onChange({ action: "concentrate", spell: spell.spell })
+                    }}
+                    prepared={spell.prepared}
+                    onPrepare={() => {
+                        onChange({ action: "prepare", spell: spell.spell })
+                    }} />;
             })}
         </>
     )
 }
 
+interface SpellbookSpell {
+    spell: Spell
+    prepared: boolean
+    concentrating: boolean
+}
+
+interface SpellbookReducerAction {
+    action: "prepare" | "concentrate"
+    spell: Spell
+}
+
+const spellReducer = (state: SpellbookSpell[], action: SpellbookReducerAction): SpellbookSpell[] => {
+    const index = state.findIndex(spell => {
+        return spell.spell === action.spell
+    });
+
+    const affectedSpell = index > -1 && state[index]
+    if (!affectedSpell) {
+        return state;
+    }
+
+    switch (action.action) {
+        case "prepare":
+            return [
+                ...state.slice(0, index),
+                {
+                    ...state[index],
+                    prepared: !state[index].prepared
+                },
+                ...state.slice(index + 1),
+            ];
+        case "concentrate":
+            return [
+                ...state.slice(0, index),
+                {
+                    ...state[index],
+                    concentrating: !state[index].concentrating
+                },
+                ...state.slice(index + 1),
+            ];
+        default:
+            return state;
+    }
+}
+
+const initialSpellbookSpells: SpellbookSpell[] = cantrips.concat(first).concat(second).concat(third)
+    .map(spell => {
+        return {
+            spell: spell,
+            prepared: false,
+            concentrating: false
+        }
+    })
+
 export const Spellbook = () => {
+    const [spells, dispatch] = useReducer(spellReducer, initialSpellbookSpells);
+
+    const cantrips = spells.filter(spell => {
+        return spell.spell.level === "Cantrip"
+    })
+
+    const first = spells.filter(spell => {
+        return spell.spell.level === "1st"
+    })
+
+    const second = spells.filter(spell => {
+        return spell.spell.level === "2nd"
+    })
+
+    const third = spells.filter(spell => {
+        return spell.spell.level === "3rd"
+    })
+
     return (
         <div className="spellbook-container">
             <h1>Cantrip</h1>
             <div className="spellbook">
-                <Spells spells={cantrips} />
+                <Spells spells={cantrips} onChange={dispatch} />
             </div>
             <h1>1st</h1>
             <div className="spellbook">
-                <Spells spells={first} />
+                <Spells spells={first} onChange={dispatch} />
             </div>
             <h1>2nd</h1>
             <div className="spellbook">
-                <Spells spells={second} />
+                <Spells spells={second} onChange={dispatch} />
             </div>
             <h1>3rd</h1>
             <div className="spellbook">
-                <Spells spells={third} />
+                <Spells spells={third} onChange={dispatch} />
             </div>
         </div>
     )
