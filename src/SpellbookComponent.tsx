@@ -26,7 +26,13 @@ interface SpellsProps {
 const Spells = ({ spells, onChange }: SpellsProps) => {
     return (
         <>
-            {spells.map((spell, index) => {
+            {spells.sort((left, right) => {
+                return left.concentrating ? -1
+                    : right.concentrating ? 1
+                        : left.prepared && right.prepared ? 0
+                            : left.prepared ? -1
+                                : right.prepared ? 1 : 0;
+            }).map((spell, index) => {
                 return <SpellComponent key={index}
                     spell={spell.spell}
                     concentrating={spell.concentrating}
@@ -114,7 +120,6 @@ const localStorageWrapper = <S, A>(reducer: (state: S, action: A) => S): (spellb
     return (spellbook: S, action: A) => {
         const newState = reducer(spellbook, action);
         localStorage.setItem("spellbook", JSON.stringify(newState));
-        console.log("localStorageWrapper got state", newState);
         return newState;
     }
 }
