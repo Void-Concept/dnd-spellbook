@@ -2,6 +2,8 @@ import React, { useReducer, Dispatch, ReducerAction } from 'react';
 import { SpellComponent, Spell } from './Spell';
 import "./spellbook.css";
 
+const MAX_PREPARED = 10;
+
 const cantrips: Spell[] = [{
     name: "Guidance",
     level: "Cantrip",
@@ -278,6 +280,15 @@ const third: Spell[] = [{
     description: "You send a short message of twenty-five words or less to a creature with which you are familiar. The creature hears the message in its mind, recognizes you as the sender if it knows you, and can answer in a like manner immediately. The spell enables creatures with Intelligence scores of at least 1 to understand the meaning of your message.\n\nYou can send the message across any distance and even to other planes of existence, but if the target is on a different plane than you, there is a 5 percent chance that the message doesn’t arrive.",
 }];
 
+const initialSpellbookSpells: SpellbookSpell[] = cantrips.concat(first).concat(second).concat(third)
+    .map(spell => {
+        return {
+            spell: spell,
+            prepared: spell.level === "Cantrip",
+            concentrating: false
+        }
+    })
+
 interface SpellsProps {
     spells: SpellbookSpell[]
     onChange: Dispatch<SpellbookReducerAction>
@@ -313,48 +324,53 @@ interface SpellbookReducerAction {
     spell: Spell
 }
 
-const spellReducer = (state: SpellbookSpell[], action: SpellbookReducerAction): SpellbookSpell[] => {
-    const index = state.findIndex(spell => {
+const spellReducer = (spellbook: SpellbookSpell[], action: SpellbookReducerAction): SpellbookSpell[] => {
+    const canPrepareNewSpell = (spellbook: SpellbookSpell[]): boolean => {
+        const currentlyPrepared = spellbook.filter(spell => {
+            return spell.prepared && spell.spell.level !== "Cantrip";
+        }).length;
+
+        return currentlyPrepared < MAX_PREPARED;
+    }
+
+    const index = spellbook.findIndex(spell => {
         return spell.spell === action.spell
     });
 
-    const affectedSpell = index > -1 && state[index]
+    const affectedSpell = index > -1 && spellbook[index]
     if (!affectedSpell) {
-        return state;
+        return spellbook;
     }
 
     switch (action.action) {
         case "prepare":
-            return [
-                ...state.slice(0, index),
-                {
-                    ...state[index],
-                    prepared: !state[index].prepared
-                },
-                ...state.slice(index + 1),
-            ];
+            const wasPrepared = spellbook[index].prepared
+            const notCantrip = spellbook[index].spell.level !== "Cantrip";
+            if (notCantrip && (wasPrepared || canPrepareNewSpell(spellbook))) {
+                return [
+                    ...spellbook.slice(0, index),
+                    {
+                        ...spellbook[index],
+                        prepared: !wasPrepared
+                    },
+                    ...spellbook.slice(index + 1),
+                ];
+            } else {
+                return spellbook;
+            }
         case "concentrate":
             return [
-                ...state.slice(0, index),
+                ...spellbook.slice(0, index),
                 {
-                    ...state[index],
-                    concentrating: !state[index].concentrating
+                    ...spellbook[index],
+                    concentrating: !spellbook[index].concentrating
                 },
-                ...state.slice(index + 1),
+                ...spellbook.slice(index + 1),
             ];
         default:
-            return state;
+            return spellbook;
     }
 }
-
-const initialSpellbookSpells: SpellbookSpell[] = cantrips.concat(first).concat(second).concat(third)
-    .map(spell => {
-        return {
-            spell: spell,
-            prepared: false,
-            concentrating: false
-        }
-    })
 
 export const Spellbook = () => {
     const [spells, dispatch] = useReducer(spellReducer, initialSpellbookSpells);
