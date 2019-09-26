@@ -26,13 +26,7 @@ interface SpellsProps {
 const Spells = ({ spells, onChange }: SpellsProps) => {
     return (
         <>
-            {spells.sort((left, right) => {
-                return left.concentrating ? -1
-                    : right.concentrating ? 1
-                        : left.prepared && right.prepared ? 0
-                            : left.prepared ? -1
-                                : right.prepared ? 1 : 0;
-            }).map((spell, index) => {
+            {spells.map((spell, index) => {
                 return <SpellComponent key={index}
                     spell={spell.spell}
                     concentrating={spell.concentrating}
