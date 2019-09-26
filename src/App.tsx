@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import { Spellbook } from './Spellbook';
+import { SpellbookComponent } from './Spellbook';
 
 const App = () => {
     return (
         <div className="hello">
-            <Spellbook />
+            <SpellbookComponent />
         </div>
     );
 }

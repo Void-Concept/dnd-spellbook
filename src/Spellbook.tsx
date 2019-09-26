@@ -1,10 +1,11 @@
 import React, { useReducer, Dispatch } from 'react';
 import { SpellComponent, Spell } from './Spell';
+import * as R from 'ramda';
 import "./spellbook.css";
 
 const MAX_PREPARED = 10;
 
-const cantrips: Spell[] = [{
+const spells: Spell[] = [{
     name: "Guidance",
     level: "Cantrip",
     school: "Divination",
@@ -63,9 +64,7 @@ const cantrips: Spell[] = [{
     duration: "Instant",
     description: "You point at one creature you can see within range, and the sound of a dolorous bell fills the air around it for a moment. The target must succeed on a Wisdom saving throw or take 1d8 necrotic damage. If the target is missing any of its hit points, it instead takes 1d12 necrotic damage.",
     higherLevel: "The spell’s damage increases by one die when you reach 5th level (2d8 or 2d12), 11th level (3d8 or 3d12), and 17th level (4d8 or 4d12)."
-}];
-
-const first: Spell[] = [{
+}, {
     name: "Comprehend Languages",
     level: "1st",
     school: "Divination",
@@ -175,9 +174,7 @@ const first: Spell[] = [{
     materials: "A piece of string and a bit of wood",
     duration: "1 hour",
     description: "This spell creates an invisible, mindless, shapeless force that performs simple tasks at your command until the spell ends. The servant springs into existence in an unoccupied space on the ground within range. It has AC 10, 1 hit point, and a Strength of 2, and it can’t attack. If it drops to 0 hit points, the spell ends.\n\nOnce on each of your turns as a bonus action, you can mentally command the servant to move up to 15 feet and interact with an object.The servant can perform simple tasks that a human servant could do, such as fetching things, cleaning, mending, folding clothes, lighting fires, serving food, and pouring wine.Once you give the command, the servant performs the task to the best of its ability until it completes the task, then waits for your next command.\n\nIf you command the servant to perform a task that would move it more than 60 feet away from you, the spell ends.",
-}]
-
-const second: Spell[] = [{
+}, {
     name: "Flaming Sphere",
     level: "2nd",
     school: "Conjuration",
@@ -222,9 +219,7 @@ const second: Spell[] = [{
     concentration: true,
     description: "You suggest a course of activity (limited to a sentence or two) and magically influence a creature you can see within range that can hear and understand you. Creatures that can’t be charmed are immune to this effect. The suggestion must be worded in such a manner as to make the course of action sound reasonable. Asking the creature to stab itself, throw itself onto a spear, immolate itself, or do some other obviously harmful act ends the spell.\n\nThe target must make a Wisdom saving throw.On a failed save, it pursues the course of action you described to the best of its ability.The suggested course of action can continue for the entire duration.If the suggested activity can be completed in a shorter time, the spell ends when the subject finishes what it was asked to do.\n\nYou can also specify conditions that will trigger a special activity during the duration.For example, you might suggest that a knight give her warhorse to the first beggar she meets.If the condition isn’t met before the spell expires, the activity isn’t performed.\n\nIf you or any of your companions damage the target, the spell ends.",
     defaultPrepared: true,
-}]
-
-const third: Spell[] = [{
+}, {
     name: "Counterspell",
     level: "3rd",
     school: "Abjuration",
@@ -280,7 +275,7 @@ const third: Spell[] = [{
     description: "You send a short message of twenty-five words or less to a creature with which you are familiar. The creature hears the message in its mind, recognizes you as the sender if it knows you, and can answer in a like manner immediately. The spell enables creatures with Intelligence scores of at least 1 to understand the meaning of your message.\n\nYou can send the message across any distance and even to other planes of existence, but if the target is on a different plane than you, there is a 5 percent chance that the message doesn’t arrive.",
 }];
 
-const initialSpellbookSpells: SpellbookSpell[] = cantrips.concat(first).concat(second).concat(third)
+const initialSpellbookSpells: SpellbookSpell[] = spells
     .map(spell => {
         return {
             spell: spell,
@@ -381,43 +376,23 @@ const spellReducer = (spellbook: SpellbookSpell[], action: SpellbookReducerActio
     }
 }
 
-export const Spellbook = () => {
+export const SpellbookComponent = () => {
     const [spells, dispatch] = useReducer(spellReducer, initialSpellbookSpells);
 
-    const cantrips = spells.filter(spell => {
-        return spell.spell.level === "Cantrip"
-    })
-
-    const first = spells.filter(spell => {
-        return spell.spell.level === "1st"
-    })
-
-    const second = spells.filter(spell => {
-        return spell.spell.level === "2nd"
-    })
-
-    const third = spells.filter(spell => {
-        return spell.spell.level === "3rd"
-    })
+    const spellsByLevel = R.groupBy((spell: SpellbookSpell) => {
+        return spell.spell.level
+    })(spells)
 
     return (
         <div className="spellbook-container">
-            <h1>Cantrip</h1>
-            <div className="spellbook">
-                <Spells spells={cantrips} onChange={dispatch} />
-            </div>
-            <h1>1st</h1>
-            <div className="spellbook">
-                <Spells spells={first} onChange={dispatch} />
-            </div>
-            <h1>2nd</h1>
-            <div className="spellbook">
-                <Spells spells={second} onChange={dispatch} />
-            </div>
-            <h1>3rd</h1>
-            <div className="spellbook">
-                <Spells spells={third} onChange={dispatch} />
-            </div>
+            {R.values(R.mapObjIndexed((spellbookSpell: SpellbookSpell[], level: string) => (
+                <div key={level}>
+                    <h1>{level}</h1>
+                    <div className="spellbook">
+                        <Spells spells={spellbookSpell} onChange={dispatch} />
+                    </div>
+                </div>
+            ))(spellsByLevel))}
         </div>
     )
 }

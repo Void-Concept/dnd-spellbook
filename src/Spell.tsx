@@ -70,10 +70,6 @@ export const SpellComponent = ({ spell, prepared, concentrating, onPrepare, onCo
 
     const [showDescription, setShowDescription] = useState(false);
 
-    // const [prepared, setPrepared] = useState(spell.level === "Cantrip" || spell.defaultPrepared);
-
-    // const [concentrating, setConcentrating] = useState(false);
-
     const onSpellClick = () => {
         setShowDescription(!showDescription);
     }
@@ -119,15 +115,12 @@ export const SpellComponent = ({ spell, prepared, concentrating, onPrepare, onCo
                 <button className={`spell-button ${prepared && "spell-button-selected"}`}
                     onClick={() => {
                         onPrepare && onPrepare(spell);
-                        // setPrepared(!prepared);
                     }}>
                     Prepare
                 </button>
                 {spell.concentration && (
                     <button className={`spell-button ${concentrating && "spell-button-selected"}`}
                         onClick={() => {
-                            const newConcentrate = !concentrating
-                            // setConcentrating(newConcentrate)
                             onConcentrate && onConcentrate(spell)
                         }}>
                         Concentrate
