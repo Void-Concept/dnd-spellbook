@@ -31,52 +31,96 @@ interface SpellProps {
     spell: Spell
 }
 
+interface ConcentrationIconProps {
+    className?: string
+    size?: number | string
+}
+
+const ConcentrationIcon = ({ size, className }: ConcentrationIconProps) => {
+    return (
+        <div className={className} title="Concentration">
+            <ThoughtBubbleIcon size={size} />
+        </div>
+    );
+}
+
+interface RitualIconProps {
+    className?: string
+    size?: number | string
+}
+
+const RitualIcon = ({ size, className }: RitualIconProps) => {
+    return (
+        <div className={className} title="Ritual">
+            <BookOpenPageVariantIcon size={size} />
+        </div>
+    );
+}
+
 export const SpellComponent = ({ spell }: SpellProps) => {
     const infoIconSize = "16px";
     const statsIconSize = "16px";
 
     const [showDescription, setShowDescription] = useState(false);
 
+    const [prepared, setPrepared] = useState(spell.level === "Cantrip");
+
+    const [concentrating, setConcentrating] = useState(false);
+
     const onSpellClick = () => {
         setShowDescription(!showDescription);
     }
-
     return (
-        <div className="spell" onClick={onSpellClick}>
-            <div className="spell-info">
-                <span className="spell-name">{spell.name}</span>
-                <span className="spell-school">{spell.school}</span>
-                <span className="spell-level">
-                    {spell.concentration ? <ThoughtBubbleIcon size={infoIconSize} className="spell-info-icon" /> : null}
-                    {spell.ritual ? <BookOpenPageVariantIcon size={infoIconSize} className="spell-info-icon" /> : null}
-                    {spell.level}
-                </span>
-            </div>
-            <hr />
-            <div className="spell-stats">
-                <span className="spell-cast-time">
-                    <CameraTimerIcon size={statsIconSize} className="spell-stats-icon" />
-                    {spell.castTime}
-                </span>
-                <span className="spell-range">
-                    <BullseyeArrowIcon size={statsIconSize} className="spell-stats-icon" />
-                    {spell.range}
-                </span>
-                <span className="spell-components">
-                    <FlaskOutlineIcon size={statsIconSize} className="spell-stats-icon" />
-                    {spell.components}
-                </span>
-                <span className="spell-duration">
-                    <TimerSandIcon size={statsIconSize} className="spell-stats-icon" />
-                    {spell.duration}
-                </span>
-            </div>
-            {showDescription && <>
-                <hr />
-                <div className="spell-description">
-                    {spell.description}
+        <div>
+            <div className="spell" onClick={onSpellClick}>
+                <div className="spell-info">
+                    <span className="spell-name">{spell.name}</span>
+                    <span className="spell-school">{spell.school}</span>
+                    <span className="spell-level">
+                        {spell.concentration ? <ConcentrationIcon size={infoIconSize} className="spell-info-icon" /> : null}
+                        {spell.ritual ? <RitualIcon size={infoIconSize} className="spell-info-icon" /> : null}
+                        {spell.level}
+                    </span>
                 </div>
-            </>}
+                <hr />
+                <div className="spell-stats">
+                    <span className="spell-cast-time">
+                        <CameraTimerIcon size={statsIconSize} className="spell-stats-icon" />
+                        {spell.castTime}
+                    </span>
+                    <span className="spell-range">
+                        <BullseyeArrowIcon size={statsIconSize} className="spell-stats-icon" />
+                        {spell.range}
+                    </span>
+                    <span className="spell-components">
+                        <FlaskOutlineIcon size={statsIconSize} className="spell-stats-icon" />
+                        {spell.components}
+                    </span>
+                    <span className="spell-duration">
+                        <TimerSandIcon size={statsIconSize} className="spell-stats-icon" />
+                        {spell.duration}
+                    </span>
+                </div>
+                {showDescription && <>
+                    <hr />
+                    <div className="spell-description">
+                        {spell.description}
+                    </div>
+                </>}
+            </div>
+            <div className="spell-buttons">
+                <button className={`spell-button ${prepared && "spell-button-selected"}`}
+                    onClick={() => setPrepared(!prepared)}>
+                    Prepare
+                </button>
+                {spell.concentration && (
+                    <button className={`spell-button ${concentrating && "spell-button-selected"}`}
+                        onClick={() => setConcentrating(!concentrating)}>
+                        Concentrate
+                    </button>
+                )}
+
+            </div>
         </div>
     );
 };

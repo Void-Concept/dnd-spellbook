@@ -64,3 +64,26 @@
 .m-r-4 {
     margin-right: 4px !important;
 }
+
+.spell-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    grid-gap: 8px;
+    border: 1px solid black;
+    border-top: 0;
+    padding: 8px
+}
+
+.spell-button {
+    -webkit-appearance: none;
+    background: 0;
+    border: 0;
+    color: #3d3d3d;
+    border: 1px solid rgb(209, 209, 209);
+    padding: 4px;
+}
+
+.spell-button-selected {
+    color: rgb(209, 209, 209);
+    background: #3d3d3d;
+}
