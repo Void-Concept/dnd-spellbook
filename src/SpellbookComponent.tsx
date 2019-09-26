@@ -3,14 +3,18 @@ import { SpellComponent, Spell } from './SpellComponent';
 import * as R from 'ramda';
 import "./spellbook.css";
 import { spells, MAX_PREPARED } from './Spellbook';
-import { T } from 'ts-toolbelt';
+
+const localStorageSpellbook: SpellbookSpell[] = JSON.parse(localStorage.getItem("spellbook") || "") || []
 
 const initialSpellbookSpells: SpellbookSpell[] = spells
     .map(spell => {
+        const localStorageSpell = localStorageSpellbook.find(lsSpell => {
+            return R.equals(lsSpell.spell, spell);
+        })
         return {
             spell: spell,
-            prepared: spell.level === "Cantrip",
-            concentrating: false
+            prepared: spell.level === "Cantrip" || !!(localStorageSpell && localStorageSpell.prepared),
+            concentrating: !!(localStorageSpell && localStorageSpell.concentrating)
         }
     })
 
@@ -106,8 +110,17 @@ const spellReducer = (spellbook: SpellbookSpell[], action: SpellbookReducerActio
     }
 }
 
+const localStorageWrapper = <S, A>(reducer: (state: S, action: A) => S): (spellbook: S, action: A) => S => {
+    return (spellbook: S, action: A) => {
+        const newState = reducer(spellbook, action);
+        localStorage.setItem("spellbook", JSON.stringify(newState));
+        console.log("localStorageWrapper got state", newState);
+        return newState;
+    }
+}
+
 export const SpellbookComponent = () => {
-    const [spells, dispatch] = useReducer(spellReducer, initialSpellbookSpells);
+    const [spells, dispatch] = useReducer(localStorageWrapper(spellReducer), initialSpellbookSpells);
 
     const spellsByLevel = R.groupBy((spell: SpellbookSpell) => {
         return spell.spell.level
