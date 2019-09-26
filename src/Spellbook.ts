@@ -1,4 +1,23 @@
-import { Spell } from "./SpellComponent";
+export type SpellLevel = "Cantrip" | "1st" | "2nd" | "3rd" | "4th" | "5th" | "6th" | "7th" | "8th" | "9th"
+
+export type SpellSchool = string //TODO: list schools of magic
+
+export type Spell = {
+    name: string
+    level: SpellLevel
+    school: SpellSchool
+    castTime: string
+    range: string
+    areaOfEffect?: string
+    components: string
+    materials?: string
+    duration: string
+    description: string
+    higherLevel?: string
+    concentration?: boolean
+    ritual?: boolean
+    defaultPrepared?: boolean
+}
 
 export const MAX_PREPARED = 10;
 

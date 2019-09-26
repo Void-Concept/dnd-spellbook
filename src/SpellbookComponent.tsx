@@ -1,8 +1,8 @@
 import React, { useReducer, Dispatch } from 'react';
-import { SpellComponent, Spell } from './SpellComponent';
+import { SpellComponent } from './SpellComponent';
 import * as R from 'ramda';
 import "./spellbook.css";
-import { spells, MAX_PREPARED } from './Spellbook';
+import { spells, MAX_PREPARED, Spell } from './Spellbook';
 
 const localStorageSpellbook: SpellbookSpell[] = JSON.parse(localStorage.getItem("spellbook") || "") || []
 

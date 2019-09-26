@@ -6,27 +6,7 @@ import TimerSandIcon from "mdi-react/TimerSandIcon";
 import FlaskOutlineIcon from "mdi-react/FlaskOutlineIcon";
 import ThoughtBubbleIcon from "mdi-react/ThoughtBubbleIcon";
 import BookOpenPageVariantIcon from "mdi-react/BookOpenPageVariantIcon";
-
-export type SpellLevel = "Cantrip" | "1st" | "2nd" | "3rd" | "4th" | "5th" | "6th" | "7th" | "8th" | "9th"
-
-export type SpellSchool = string //TODO: list schools of magic
-
-export type Spell = {
-    name: string
-    level: SpellLevel
-    school: SpellSchool
-    castTime: string
-    range: string
-    areaOfEffect?: string
-    components: string
-    materials?: string
-    duration: string
-    description: string
-    higherLevel?: string
-    concentration?: boolean
-    ritual?: boolean
-    defaultPrepared?: boolean
-}
+import { Spell } from './Spellbook';
 
 interface SpellComponentProps {
     spell: Spell
@@ -112,18 +92,18 @@ export const SpellComponent = ({ spell, prepared, concentrating, onPrepare, onCo
                 </>}
             </div>
             <div className="spell-buttons">
-                <button className={`spell-button ${prepared && "spell-button-selected"}`}
+                <button className={`spell-button ${prepared && "spell-button-prepared"}`}
                     onClick={() => {
                         onPrepare && onPrepare(spell);
                     }}>
                     Prepare
                 </button>
                 {spell.concentration && (
-                    <button className={`spell-button ${concentrating && "spell-button-selected"}`}
+                    <button className={`spell-button ${concentrating && "spell-button-concentrating"}`}
                         onClick={() => {
                             onConcentrate && onConcentrate(spell)
                         }}>
-                        Concentrate
+                        Concentration
                     </button>
                 )}
             </div>

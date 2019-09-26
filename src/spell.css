@@ -83,7 +83,12 @@
     padding: 4px;
 }
 
-.spell-button-selected {
-    color: rgb(209, 209, 209);
-    background: #3d3d3d;
+.spell-button-prepared {
+    color: rgb(0, 0, 0);
+    background: #61db80;
+}
+
+.spell-button-concentrating {
+    color: rgb(0, 0, 0);
+    background: #61c9db;
 }
