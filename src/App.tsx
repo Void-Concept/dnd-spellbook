@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { SpellbookComponent } from './Spellbook';
+import { SpellbookComponent } from './SpellbookComponent';
 
 const App = () => {
     return (
