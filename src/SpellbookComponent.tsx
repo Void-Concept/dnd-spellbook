@@ -13,7 +13,7 @@ const initialSpellbookSpells: SpellbookSpell[] = spells
         })
         return {
             spell: spell,
-            prepared: spell.level === "Cantrip" || !!(localStorageSpell && localStorageSpell.prepared),
+            prepared: spell.level === "Cantrip" || !!(localStorageSpell && localStorageSpell.prepared) || !!spell.alwaysPrepared,
             concentrating: !!(localStorageSpell && localStorageSpell.concentrating)
         }
     })
@@ -62,7 +62,7 @@ interface SpellbookReducerAction {
 const spellReducer = (spellbook: SpellbookSpell[], action: SpellbookReducerAction): SpellbookSpell[] => {
     const canPrepareNewSpell = (spellbook: SpellbookSpell[]): boolean => {
         const currentlyPrepared = spellbook.filter(spell => {
-            return spell.prepared && spell.spell.level !== "Cantrip";
+            return spell.prepared && spell.spell.level !== "Cantrip" && !spell.spell.alwaysPrepared;
         }).length;
 
         return currentlyPrepared < MAX_PREPARED;
@@ -80,8 +80,8 @@ const spellReducer = (spellbook: SpellbookSpell[], action: SpellbookReducerActio
     switch (action.action) {
         case "prepare":
             const willBePrepared = !spellbook[index].prepared
-            const notCantrip = spellbook[index].spell.level !== "Cantrip";
-            if (notCantrip && (!willBePrepared || canPrepareNewSpell(spellbook))) {
+            const notAlwaysPrepared = spellbook[index].spell.level !== "Cantrip" && !spellbook[index].spell.alwaysPrepared;
+            if (notAlwaysPrepared && (!willBePrepared || canPrepareNewSpell(spellbook))) {
                 return [
                     ...spellbook.slice(0, index),
                     {
